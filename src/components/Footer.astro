@@ -1,0 +1,81 @@
+---
+import { brand, nav, branches, insurers } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-cream-300 bg-forest-800 text-cream-100">
+  <div class="mx-auto max-w-8xl px-6 py-16 md:px-10">
+    <div class="grid grid-cols-1 gap-12 md:grid-cols-4">
+      <div class="md:col-span-1">
+        <span class="font-display text-2xl font-semibold text-cream-50">Uzima</span>
+        <p class="mt-3 max-w-xs text-sm leading-relaxed text-forest-100/80">
+          {brand.tagline} Family medicine, paediatrics, dental and diagnostics across three
+          Kenyan cities.
+        </p>
+        <a
+          href={`https://wa.me/${brand.whatsappNumber}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-5 inline-flex items-center gap-2 rounded-full border border-cream-50/30 px-5 py-2.5 text-sm font-semibold text-cream-50 transition-colors hover:bg-cream-50/10"
+        >
+          Chat on WhatsApp
+        </a>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-forest-200/70">
+          Navigate
+        </h3>
+        <ul class="mt-4 space-y-2.5">
+          {
+            nav.map((item) => (
+              <li>
+                <a href={item.href} class="text-sm text-cream-100/90 hover:text-gold-400">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-forest-200/70">
+          Our Branches
+        </h3>
+        <ul class="mt-4 space-y-3">
+          {
+            branches.map((b) => (
+              <li class="text-sm text-cream-100/90">
+                <span class="font-medium text-cream-50">{b.city}, {b.area}</span>
+                <br />
+                <span class="text-cream-100/70">{b.phone}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-forest-200/70">
+          Insurance & Payment
+        </h3>
+        <ul class="mt-4 flex flex-wrap gap-x-3 gap-y-2 text-sm text-cream-100/80">
+          {
+            insurers.map((name) => (
+              <li class="rounded border border-cream-50/15 px-2.5 py-1 text-xs">{name}</li>
+            ))
+          }
+        </ul>
+        <a href={`mailto:${brand.email}`} class="mt-5 block text-sm text-cream-100/90 hover:text-gold-400">
+          {brand.email}
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-14 flex flex-col items-start justify-between gap-4 border-t border-cream-50/10 pt-8 text-xs text-cream-100/60 md:flex-row md:items-center">
+      <p>© {year} Uzima Family Clinic. A design portfolio concept, not a real medical provider.</p>
+      <p>Nairobi · Mombasa · Kisumu</p>
+    </div>
+  </div>
+</footer>

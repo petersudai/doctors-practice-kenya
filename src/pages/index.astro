@@ -1,0 +1,170 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import TrustStrip from "../components/TrustStrip.astro";
+import StatsStrip from "../components/StatsStrip.astro";
+import DoctorCard from "../components/DoctorCard.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
+import BranchCard from "../components/BranchCard.astro";
+import CTABand from "../components/CTABand.astro";
+import { doctors, services, testimonials, branches, images } from "../data/site";
+
+const featuredDoctors = doctors.slice(0, 3);
+const featuredServices = services.slice(0, 4);
+---
+
+<Layout
+  title="Family Medicine Across Kenya"
+  description="Uzima Family Clinic offers same-week family medicine, paediatric care, dental and diagnostics across Nairobi, Mombasa and Kisumu. SHA, NHIF and M-Pesa accepted."
+>
+  <section class="relative overflow-hidden">
+    <div class="mx-auto grid max-w-8xl grid-cols-1 items-center gap-10 px-6 pb-16 pt-14 md:grid-cols-2 md:gap-16 md:px-10 md:pb-24 md:pt-20">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-clay-600">
+          Family medicine, since 2011
+        </p>
+        <h1 class="mt-4 font-display text-4xl font-semibold leading-[1.08] text-ink-900 text-balance sm:text-5xl lg:text-6xl">
+          Healthcare that knows your <span class="font-display-italic text-clay-600">name.</span>
+        </h1>
+        <p class="mt-6 max-w-md text-base leading-relaxed text-ink-700 md:text-lg">
+          Three clinics across Kenya where the same doctor sees you every visit, your
+          child's growth chart is never lost, and a same-week appointment is the default,
+          not the exception.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a
+            href="/contact"
+            class="rounded-full bg-clay-500 px-7 py-3.5 text-sm font-semibold text-cream-50 shadow-sm shadow-clay-900/20 transition-transform hover:scale-105"
+          >
+            Book an Appointment
+          </a>
+          <a
+            href="/doctors"
+            class="rounded-full border border-ink-900/15 px-7 py-3.5 text-sm font-semibold text-ink-900 transition-colors hover:bg-ink-900/5"
+          >
+            Meet Our Doctors
+          </a>
+        </div>
+        <div class="mt-10 flex items-center gap-4">
+          <div class="flex -space-x-3">
+            {
+              testimonials.map((t) => (
+                <img
+                  src={t.photo}
+                  alt={t.name}
+                  class="h-10 w-10 rounded-full border-2 border-cream-100 object-cover"
+                />
+              ))
+            }
+          </div>
+          <p class="text-sm text-ink-500">
+            <span class="font-semibold text-ink-900">4.9/5</span> from over 800 patient reviews
+          </p>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-cream-300 sm:aspect-[5/6]">
+          <img
+            src={images.heroHome}
+            alt="A surgeon in blue scrubs at Uzima Family Clinic"
+            class="h-full w-full object-cover"
+          />
+        </div>
+        <div class="absolute -bottom-6 -left-6 hidden max-w-[220px] rounded-xl bg-cream-50 p-5 shadow-xl shadow-ink-900/10 sm:block">
+          <p class="font-display text-3xl font-semibold text-forest-700">22,000+</p>
+          <p class="mt-1 text-xs text-ink-500">Patients treated across three counties</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <TrustStrip />
+
+  <section class="mx-auto max-w-8xl px-6 py-20 md:px-10 md:py-28">
+    <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+      <SectionHeading eyebrow="What we treat" title="Care built around the whole family" />
+      <a href="/services" class="text-sm font-semibold text-clay-600 hover:text-clay-700">
+        View all services →
+      </a>
+    </div>
+    <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {featuredServices.map((service) => <ServiceCard service={service} />)}
+    </div>
+  </section>
+
+  <section class="bg-forest-50">
+    <div class="mx-auto grid max-w-8xl grid-cols-1 items-center gap-12 px-6 py-20 md:grid-cols-2 md:px-10 md:py-28">
+      <div class="order-2 aspect-[4/3] overflow-hidden rounded-2xl md:order-1">
+        <img
+          src={images.waitingRoom}
+          alt="Uzima Family Clinic waiting room"
+          class="h-full w-full object-cover"
+        />
+      </div>
+      <div class="order-1 md:order-2">
+        <SectionHeading eyebrow="Why Uzima" title="Built by a doctor tired of ten-minute consultations" />
+        <p class="mt-6 text-base leading-relaxed text-ink-700">
+          Dr. Wanjiru Kamau opened the first Uzima branch in Kilimani after a decade in
+          public hospitals, where good doctors were rushed and families rarely saw the
+          same face twice. Every branch since has kept her original rule: no consultation
+          shorter than twenty minutes, and no patient history that starts from zero.
+        </p>
+        <ul class="mt-6 space-y-4">
+          <li class="flex gap-3">
+            <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-clay-500"></span>
+            <span class="text-sm text-ink-700">
+              Digital patient records shared across all three branches
+            </span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-clay-500"></span>
+            <span class="text-sm text-ink-700">
+              On-site lab, pharmacy and dental suite, most visits resolved in one stop
+            </span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-clay-500"></span>
+            <span class="text-sm text-ink-700">SHA, NHIF and six private insurers accepted directly</span>
+          </li>
+        </ul>
+        <a href="/about" class="mt-8 inline-block text-sm font-semibold text-forest-700 hover:text-forest-800">
+          Read our full story →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <StatsStrip />
+
+  <section class="mx-auto max-w-8xl px-6 py-20 md:px-10 md:py-28">
+    <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+      <SectionHeading eyebrow="Our doctors" title="Meet the team you'll actually see" />
+      <a href="/doctors" class="text-sm font-semibold text-clay-600 hover:text-clay-700">
+        View full team →
+      </a>
+    </div>
+    <div class="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-3">
+      {featuredDoctors.map((doctor) => <DoctorCard doctor={doctor} />)}
+    </div>
+  </section>
+
+  <section class="bg-ink-900">
+    <div class="mx-auto max-w-8xl px-6 py-20 md:px-10 md:py-28">
+      <SectionHeading eyebrow="Patient stories" title="What families across Kenya are saying" light />
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+        {testimonials.map((t) => <TestimonialCard testimonial={t} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-8xl px-6 py-20 md:px-10 md:py-28">
+    <SectionHeading eyebrow="Find us" title="Three branches, one patient record" />
+    <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+      {branches.map((branch) => <BranchCard branch={branch} />)}
+    </div>
+  </section>
+
+  <CTABand />
+</Layout>

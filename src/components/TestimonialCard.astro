@@ -1,0 +1,29 @@
+---
+import type { Testimonial } from "../data/site";
+
+interface Props {
+  testimonial: Testimonial;
+}
+const { testimonial } = Astro.props;
+---
+
+<figure class="flex h-full flex-col rounded-lg bg-cream-50 p-7 shadow-sm shadow-ink-900/5">
+  <svg viewBox="0 0 32 24" class="h-7 w-7 fill-clay-300">
+    <path d="M0 24V14.4C0 6.4 4.8 1.2 12.8 0l1.6 3.2C9.6 4.8 7.2 8 7.2 12h6.4v12H0Zm17.6 0V14.4c0-8 4.8-13.2 12.8-14.4L32 3.2c-4.8 1.6-7.2 4.8-7.2 8.8h6.4v12H17.6Z" />
+  </svg>
+  <blockquote class="mt-4 flex-1 text-[15px] leading-relaxed text-ink-700">
+    {testimonial.quote}
+  </blockquote>
+  <figcaption class="mt-6 flex items-center gap-3">
+    <img
+      src={testimonial.photo}
+      alt={testimonial.name}
+      loading="lazy"
+      class="h-11 w-11 rounded-full object-cover"
+    />
+    <div>
+      <p class="text-sm font-semibold text-ink-900">{testimonial.name}</p>
+      <p class="text-xs text-ink-500">{testimonial.location}</p>
+    </div>
+  </figcaption>
+</figure>

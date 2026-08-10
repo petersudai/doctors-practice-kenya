@@ -1,0 +1,108 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import CTABand from "../components/CTABand.astro";
+import { services, insurers, images } from "../data/site";
+
+const billingSteps = [
+  {
+    step: "01",
+    title: "Tell us your cover",
+    body: "Share your SHA, NHIF or private insurance details when you book, and we verify it before your visit.",
+  },
+  {
+    step: "02",
+    title: "See the doctor",
+    body: "Consultations, tests and prescriptions happen in one visit wherever possible. No return trip just for results.",
+  },
+  {
+    step: "03",
+    title: "We settle the claim",
+    body: "Covered costs are billed directly to your insurer. You only pay the balance, by M-Pesa, card or cash.",
+  },
+];
+---
+
+<Layout
+  title="Services"
+  description="From family consultations to dental care and diagnostics, see the full range of services at Uzima Family Clinic across Nairobi, Mombasa and Kisumu."
+  image={images.heroServices}
+>
+  <section class="relative">
+    <div class="aspect-[16/9] w-full overflow-hidden sm:aspect-[21/9]">
+      <img src={images.heroServices} alt="Dental care at Uzima Family Clinic" class="h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-ink-900/10 to-transparent"></div>
+    </div>
+    <div class="absolute inset-x-0 bottom-0 mx-auto max-w-8xl px-6 pb-10 md:px-10 md:pb-14">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-400">Services</p>
+      <h1 class="mt-3 max-w-2xl font-display text-4xl font-semibold text-cream-50 text-balance md:text-5xl">
+        Most visits are resolved in one stop
+      </h1>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-8xl px-6 py-20 md:px-10 md:py-28">
+    <SectionHeading
+      eyebrow="What we offer"
+      title="Six departments, three branches, one patient file"
+    />
+    <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((service) => <ServiceCard service={service} detailed />)}
+    </div>
+  </section>
+
+  <section class="bg-forest-800 py-20 text-cream-50 md:py-28">
+    <div class="mx-auto max-w-8xl px-6 md:px-10">
+      <SectionHeading eyebrow="Paying for care" title="How billing works, in three steps" light />
+      <div class="mt-12 grid grid-cols-1 gap-10 md:grid-cols-3">
+        {
+          billingSteps.map((s) => (
+            <div>
+              <span class="font-display text-3xl font-semibold text-gold-400">{s.step}</span>
+              <h3 class="mt-3 font-display text-lg font-semibold text-cream-50">{s.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-cream-100/75">{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-16 rounded-2xl bg-forest-700/60 p-8 md:p-10">
+        <h3 class="font-display text-xl font-semibold text-cream-50">Accepted cover & payment</h3>
+        <ul class="mt-5 flex flex-wrap gap-3">
+          {
+            insurers.map((name) => (
+              <li class="rounded-full border border-cream-50/25 px-4 py-2 text-sm text-cream-100">
+                {name}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
+    <SectionHeading
+      eyebrow="First visit"
+      title="What to bring to your first appointment"
+      align="center"
+    />
+    <div class="mt-10 grid grid-cols-1 gap-8 text-left sm:grid-cols-3">
+      <div class="rounded-lg border border-cream-300 p-6">
+        <p class="text-sm font-semibold text-ink-900">National ID or passport</p>
+        <p class="mt-2 text-sm text-ink-500">Required to open a patient file at any branch.</p>
+      </div>
+      <div class="rounded-lg border border-cream-300 p-6">
+        <p class="text-sm font-semibold text-ink-900">Insurance card, if covered</p>
+        <p class="mt-2 text-sm text-ink-500">SHA, NHIF or private cover details to verify benefits.</p>
+      </div>
+      <div class="rounded-lg border border-cream-300 p-6">
+        <p class="text-sm font-semibold text-ink-900">Past prescriptions or results</p>
+        <p class="mt-2 text-sm text-ink-500">Helpful but not required. We'll rebuild your history either way.</p>
+      </div>
+    </div>
+  </section>
+
+  <CTABand />
+</Layout>

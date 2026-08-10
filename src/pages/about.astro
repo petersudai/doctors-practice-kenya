@@ -1,0 +1,129 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import StatsStrip from "../components/StatsStrip.astro";
+import CTABand from "../components/CTABand.astro";
+import { images } from "../data/site";
+
+const values = [
+  {
+    title: "Twenty minutes, minimum",
+    body: "Every consultation is booked for at least twenty minutes. If a doctor needs longer, they take it, no double-booking to make up the time.",
+  },
+  {
+    title: "One record, three cities",
+    body: "Your file follows you between branches. A Nairobi patient seen in Mombasa on holiday doesn't start from a blank page.",
+  },
+  {
+    title: "Say the price up front",
+    body: "Consultation and common procedure costs are posted at reception and on WhatsApp before you commit to a visit.",
+  },
+  {
+    title: "Refer out, don't guess",
+    body: "When something is outside our scope, our doctors say so immediately and connect you to a specialist we trust.",
+  },
+];
+
+const milestones = [
+  {
+    year: "2011",
+    title: "Kilimani branch opens",
+    body: "Dr. Wanjiru Kamau leaves public practice to open a four-room clinic on Argwings Kodhek Road with one nurse and a borrowed X-ray machine.",
+  },
+  {
+    year: "2015",
+    title: "Mombasa branch, Nyali",
+    body: "Demand from patients relocating to the coast leads to a second branch, this one with a full dental suite from day one.",
+  },
+  {
+    year: "2019",
+    title: "Kisumu branch, Milimani",
+    body: "A third branch opens in western Kenya, and patient records move onto a shared digital system across all sites.",
+  },
+  {
+    year: "2024",
+    title: "22,000th patient record",
+    body: "Uzima crosses 22,000 patients treated, with SHA and six private insurers now billed directly at every branch.",
+  },
+];
+---
+
+<Layout
+  title="About Us"
+  description="Uzima Family Clinic was founded in 2011 in Nairobi by Dr. Wanjiru Kamau. Learn our story, our values, and how we've grown to three branches across Kenya."
+  image={images.heroAbout}
+>
+  <section class="relative">
+    <div class="aspect-[16/9] w-full overflow-hidden sm:aspect-[21/9]">
+      <img src={images.heroAbout} alt="A doctor at Uzima Family Clinic" class="h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-ink-900/10 to-transparent"></div>
+    </div>
+    <div class="absolute inset-x-0 bottom-0 mx-auto max-w-8xl px-6 pb-10 md:px-10 md:pb-14">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-400">Our story</p>
+      <h1 class="mt-3 max-w-2xl font-display text-4xl font-semibold text-cream-50 text-balance md:text-5xl">
+        Built from one doctor's frustration with rushed medicine
+      </h1>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-20 md:py-28">
+    <p class="font-display text-2xl leading-relaxed text-ink-900 md:text-3xl">
+      Dr. Wanjiru Kamau spent ten years in Nairobi's public hospitals watching good doctors
+      run through patients in under ten minutes, not because they didn't care, but because
+      the system left them no choice.
+    </p>
+    <p class="mt-6 text-base leading-relaxed text-ink-700">
+      In 2011 she opened Uzima's first branch in Kilimani with one rule that has never
+      changed since: no consultation shorter than twenty minutes. It meant seeing fewer
+      patients a day than a typical clinic. It also meant catching the things a rushed
+      visit misses, a medication interaction, a growth pattern worth watching, a family
+      history that changes the diagnosis entirely.
+    </p>
+    <p class="mt-6 text-base leading-relaxed text-ink-700">
+      Thirteen years on, Uzima has grown to three branches spanning Nairobi, Mombasa and
+      Kisumu, treating over 22,000 patients while keeping the founding promise intact.
+      The clinic has changed size. The twenty minutes has not.
+    </p>
+  </section>
+
+  <section class="bg-forest-50 py-20 md:py-28">
+    <div class="mx-auto max-w-8xl px-6 md:px-10">
+      <SectionHeading eyebrow="What we hold to" title="Four rules that don't bend with growth" />
+      <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          values.map((v, i) => (
+            <div class="border-t-2 border-clay-400 pt-5">
+              <span class="font-display text-sm text-clay-600">0{i + 1}</span>
+              <h3 class="mt-2 font-display text-lg font-semibold text-ink-900">{v.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-ink-500">{v.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-6 py-20 md:py-28">
+    <SectionHeading eyebrow="Thirteen years" title="How we grew from one room to three counties" align="center" />
+    <div class="mt-14 space-y-10">
+      {
+        milestones.map((m) => (
+          <div class="grid grid-cols-[auto_1fr] gap-6 border-b border-cream-300 pb-10 last:border-0">
+            <span class="font-display text-2xl font-semibold text-clay-500 md:text-3xl">{m.year}</span>
+            <div>
+              <h3 class="font-display text-lg font-semibold text-ink-900">{m.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-500">{m.body}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <StatsStrip />
+
+  <CTABand
+    heading="Come see the difference in person."
+    subheading="The best way to understand Uzima is a single visit. Book your first appointment today."
+  />
+</Layout>

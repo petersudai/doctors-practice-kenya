@@ -1,0 +1,39 @@
+---
+import { brand } from "../data/site";
+
+interface Props {
+  heading?: string;
+  subheading?: string;
+}
+const {
+  heading = "Ready when you are.",
+  subheading = "Book a same-week appointment at any of our three branches, by WhatsApp, phone, or the form below.",
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-clay-500">
+  <div class="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-clay-400/40"></div>
+  <div class="absolute -bottom-32 -left-16 h-72 w-72 rounded-full bg-clay-600/40"></div>
+  <div class="relative mx-auto max-w-8xl px-6 py-20 text-center md:px-10">
+    <h2 class="font-display text-3xl font-semibold text-cream-50 text-balance md:text-4xl">
+      {heading}
+    </h2>
+    <p class="mx-auto mt-4 max-w-xl text-cream-50/90">{subheading}</p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <a
+        href="/contact"
+        class="rounded-full bg-cream-50 px-7 py-3.5 text-sm font-semibold text-clay-700 transition-transform hover:scale-105"
+      >
+        Book an Appointment
+      </a>
+      <a
+        href={`https://wa.me/${brand.whatsappNumber}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-full border border-cream-50/60 px-7 py-3.5 text-sm font-semibold text-cream-50 transition-colors hover:bg-cream-50/10"
+      >
+        Chat on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
