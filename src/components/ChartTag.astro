@@ -1,0 +1,19 @@
+---
+interface Props {
+  label: string;
+  light?: boolean;
+  class?: string;
+}
+const { label, light = false, class: className = "" } = Astro.props;
+---
+
+<span
+  class:list={[
+    "inline-flex items-center gap-1.5 border font-mono-tag text-[11px] uppercase tracking-[0.08em]",
+    "px-2.5 py-1",
+    light ? "border-bone/40 text-bone" : "border-line text-ink-2",
+    className,
+  ]}
+>
+  <span class="text-clay">[</span>{label}<span class="text-clay">]</span>
+</span>

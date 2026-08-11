@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
+import ChartTag from "../components/ChartTag.astro";
 import TrustStrip from "../components/TrustStrip.astro";
 import StatsStrip from "../components/StatsStrip.astro";
 import DoctorCard from "../components/DoctorCard.astro";
@@ -18,118 +19,131 @@ const featuredServices = services.slice(0, 4);
   title="Family Medicine Across Kenya"
   description="Uzima Family Clinic offers same-week family medicine, paediatric care, dental and diagnostics across Nairobi, Mombasa and Kisumu. SHA, NHIF and M-Pesa accepted."
 >
-  <section class="relative overflow-hidden">
-    <div class="mx-auto grid max-w-8xl grid-cols-1 items-center gap-10 px-6 pb-16 pt-14 md:grid-cols-2 md:gap-16 md:px-10 md:pb-24 md:pt-20">
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-clay-600">
-          Family medicine, since 2011
+  <section class="bg-grain relative overflow-hidden bg-ink text-paper">
+    <div class="mx-auto grid max-w-8xl grid-cols-1 gap-10 px-6 pb-0 pt-14 md:grid-cols-12 md:gap-4 md:px-10 md:pt-20">
+      <div class="md:col-span-7 md:pb-24">
+        <p class="font-mono-tag text-[11px] uppercase tracking-[0.1em] text-bone/70">
+          <span class="text-clay">[</span>Patient file since 2011<span class="text-clay">]</span>
         </p>
-        <h1 class="mt-4 font-display text-4xl font-semibold leading-[1.08] text-ink-900 text-balance sm:text-5xl lg:text-6xl">
-          Healthcare that knows your <span class="font-display-italic text-clay-600">name.</span>
+        <h1 class="mt-6 font-display text-[13vw] font-black leading-[0.86] tracking-tight text-balance sm:text-[9vw] md:text-[6.4vw]">
+          Healthcare
+          <br />
+          that knows
+          <br />
+          your <span class="font-display-italic text-clay">name.</span>
         </h1>
-        <p class="mt-6 max-w-md text-base leading-relaxed text-ink-700 md:text-lg">
+        <p class="mt-8 max-w-md text-base leading-relaxed text-bone/80 md:text-lg">
           Three clinics across Kenya where the same doctor sees you every visit, your
           child's growth chart is never lost, and a same-week appointment is the default,
           not the exception.
         </p>
-        <div class="mt-8 flex flex-wrap items-center gap-4">
+        <div class="mt-9 flex flex-wrap items-center gap-4">
           <a
             href="/contact"
-            class="rounded-full bg-clay-500 px-7 py-3.5 text-sm font-semibold text-cream-50 shadow-sm shadow-clay-900/20 transition-transform hover:scale-105"
+            class="rounded-full bg-clay px-7 py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-pulse"
           >
             Book an Appointment
           </a>
           <a
             href="/doctors"
-            class="rounded-full border border-ink-900/15 px-7 py-3.5 text-sm font-semibold text-ink-900 transition-colors hover:bg-ink-900/5"
+            class="rounded-full border border-paper/25 px-7 py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-paper/10"
           >
             Meet Our Doctors
           </a>
         </div>
-        <div class="mt-10 flex items-center gap-4">
+        <div class="mt-12 flex items-center gap-4">
           <div class="flex -space-x-3">
             {
               testimonials.map((t) => (
                 <img
                   src={t.photo}
                   alt={t.name}
-                  class="h-10 w-10 rounded-full border-2 border-cream-100 object-cover"
+                  class="h-9 w-9 rounded-full border-2 border-ink object-cover grayscale"
                 />
               ))
             }
           </div>
-          <p class="text-sm text-ink-500">
-            <span class="font-semibold text-ink-900">4.9/5</span> from over 800 patient reviews
+          <p class="font-mono-tag text-[11px] uppercase tracking-[0.05em] text-bone/60">
+            4.9/5 — 800+ patient reviews
           </p>
         </div>
       </div>
 
-      <div class="relative">
-        <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-cream-300 sm:aspect-[5/6]">
+      <div class="relative md:col-span-5">
+        <div class="relative aspect-[4/5] w-full overflow-hidden bg-ink-2 sm:aspect-[5/6] md:absolute md:inset-0 md:aspect-auto">
           <img
             src={images.heroHome}
             alt="A surgeon in blue scrubs at Uzima Family Clinic"
             class="h-full w-full object-cover"
           />
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent"></div>
         </div>
-        <div class="absolute -bottom-6 -left-6 hidden max-w-[220px] rounded-xl bg-cream-50 p-5 shadow-xl shadow-ink-900/10 sm:block">
-          <p class="font-display text-3xl font-semibold text-forest-700">22,000+</p>
-          <p class="mt-1 text-xs text-ink-500">Patients treated across three counties</p>
+        <div class="absolute -bottom-px left-0 z-10 border border-line-dark bg-ink/90 p-5 backdrop-blur md:left-auto md:right-0">
+          <p class="font-display text-3xl font-semibold text-clay">22,000+</p>
+          <p class="font-mono-tag mt-1 text-[10px] uppercase tracking-[0.05em] text-bone/70">
+            Patients treated across three counties
+          </p>
         </div>
       </div>
+    </div>
+
+    <div class="mx-auto flex max-w-8xl items-center justify-between border-t border-line-dark px-6 py-4 md:px-10">
+      <span class="font-mono-tag text-[11px] uppercase tracking-[0.05em] text-bone/50">Scroll</span>
+      <span class="h-8 w-px animate-pulse bg-line-dark"></span>
+      <span class="font-mono-tag text-[11px] uppercase tracking-[0.05em] text-bone/50">01 / Home</span>
     </div>
   </section>
 
   <TrustStrip />
 
   <section class="mx-auto max-w-8xl px-6 py-20 md:px-10 md:py-28">
-    <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+    <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end" data-reveal>
       <SectionHeading eyebrow="What we treat" title="Care built around the whole family" />
-      <a href="/services" class="text-sm font-semibold text-clay-600 hover:text-clay-700">
+      <a href="/services" class="font-mono-tag text-[12px] uppercase tracking-[0.05em] text-clay hover:text-clay-dark">
         View all services →
       </a>
     </div>
     <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {featuredServices.map((service) => <ServiceCard service={service} />)}
+      {featuredServices.map((service, i) => <ServiceCard service={service} index={i} />)}
     </div>
   </section>
 
-  <section class="bg-forest-50">
+  <section class="border-y border-line bg-paper-2">
     <div class="mx-auto grid max-w-8xl grid-cols-1 items-center gap-12 px-6 py-20 md:grid-cols-2 md:px-10 md:py-28">
-      <div class="order-2 aspect-[4/3] overflow-hidden rounded-2xl md:order-1">
+      <div class="order-2 aspect-[4/3] overflow-hidden md:order-1" data-reveal>
         <img
           src={images.waitingRoom}
           alt="Uzima Family Clinic waiting room"
-          class="h-full w-full object-cover"
+          class="h-full w-full object-cover grayscale-[20%]"
         />
       </div>
-      <div class="order-1 md:order-2">
+      <div class="order-1 md:order-2" data-reveal>
         <SectionHeading eyebrow="Why Uzima" title="Built by a doctor tired of ten-minute consultations" />
-        <p class="mt-6 text-base leading-relaxed text-ink-700">
+        <p class="mt-6 text-base leading-relaxed text-ink-2/80">
           Dr. Wanjiru Kamau opened the first Uzima branch in Kilimani after a decade in
           public hospitals, where good doctors were rushed and families rarely saw the
           same face twice. Every branch since has kept her original rule: no consultation
           shorter than twenty minutes, and no patient history that starts from zero.
         </p>
-        <ul class="mt-6 space-y-4">
+        <ul class="mt-6 space-y-3 border-t border-line pt-6">
           <li class="flex gap-3">
-            <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-clay-500"></span>
-            <span class="text-sm text-ink-700">
+            <ChartTag label="01" />
+            <span class="text-sm text-ink-2/80">
               Digital patient records shared across all three branches
             </span>
           </li>
           <li class="flex gap-3">
-            <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-clay-500"></span>
-            <span class="text-sm text-ink-700">
+            <ChartTag label="02" />
+            <span class="text-sm text-ink-2/80">
               On-site lab, pharmacy and dental suite, most visits resolved in one stop
             </span>
           </li>
           <li class="flex gap-3">
-            <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-clay-500"></span>
-            <span class="text-sm text-ink-700">SHA, NHIF and six private insurers accepted directly</span>
+            <ChartTag label="03" />
+            <span class="text-sm text-ink-2/80">SHA, NHIF and six private insurers accepted directly</span>
           </li>
         </ul>
-        <a href="/about" class="mt-8 inline-block text-sm font-semibold text-forest-700 hover:text-forest-800">
+        <a href="/about" class="mt-8 inline-block font-mono-tag text-[12px] uppercase tracking-[0.05em] text-clay hover:text-clay-dark">
           Read our full story →
         </a>
       </div>
@@ -139,9 +153,9 @@ const featuredServices = services.slice(0, 4);
   <StatsStrip />
 
   <section class="mx-auto max-w-8xl px-6 py-20 md:px-10 md:py-28">
-    <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+    <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end" data-reveal>
       <SectionHeading eyebrow="Our doctors" title="Meet the team you'll actually see" />
-      <a href="/doctors" class="text-sm font-semibold text-clay-600 hover:text-clay-700">
+      <a href="/doctors" class="font-mono-tag text-[12px] uppercase tracking-[0.05em] text-clay hover:text-clay-dark">
         View full team →
       </a>
     </div>
@@ -150,10 +164,10 @@ const featuredServices = services.slice(0, 4);
     </div>
   </section>
 
-  <section class="bg-ink-900">
+  <section class="bg-grain border-y border-line-dark bg-ink">
     <div class="mx-auto max-w-8xl px-6 py-20 md:px-10 md:py-28">
       <SectionHeading eyebrow="Patient stories" title="What families across Kenya are saying" light />
-      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3" data-reveal-group>
         {testimonials.map((t) => <TestimonialCard testimonial={t} />)}
       </div>
     </div>

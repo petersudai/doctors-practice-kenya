@@ -7,13 +7,13 @@ const items = [
 ];
 ---
 
-<div class="border-y border-cream-300 bg-cream-200">
-  <div class="mx-auto grid max-w-8xl grid-cols-2 gap-x-6 gap-y-6 px-6 py-8 md:grid-cols-4 md:px-10">
+<div class="border-y border-line bg-paper-2">
+  <div class="mx-auto grid max-w-8xl grid-cols-2 gap-x-6 gap-y-6 px-6 py-8 md:grid-cols-4 md:px-10" data-reveal-group>
     {
       items.map((item) => (
-        <div class="border-l-2 border-clay-400 pl-4">
-          <p class="text-sm font-semibold text-ink-900">{item.label}</p>
-          <p class="mt-1 text-xs text-ink-500">{item.detail}</p>
+        <div class="border-l-2 border-clay pl-4">
+          <p class="text-sm font-semibold text-ink">{item.label}</p>
+          <p class="mt-1 text-xs text-ink-2/60">{item.detail}</p>
         </div>
       ))
     }

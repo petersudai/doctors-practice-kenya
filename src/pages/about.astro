@@ -1,9 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
+import ChartTag from "../components/ChartTag.astro";
 import StatsStrip from "../components/StatsStrip.astro";
 import CTABand from "../components/CTABand.astro";
-import { images } from "../data/site";
+import { images, branches } from "../data/site";
 
 const values = [
   {
@@ -53,49 +54,53 @@ const milestones = [
   description="Uzima Family Clinic was founded in 2011 in Nairobi by Dr. Wanjiru Kamau. Learn our story, our values, and how we've grown to three branches across Kenya."
   image={images.heroAbout}
 >
-  <section class="relative">
-    <div class="aspect-[16/9] w-full overflow-hidden sm:aspect-[21/9]">
-      <img src={images.heroAbout} alt="A doctor at Uzima Family Clinic" class="h-full w-full object-cover" />
-      <div class="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-ink-900/10 to-transparent"></div>
-    </div>
-    <div class="absolute inset-x-0 bottom-0 mx-auto max-w-8xl px-6 pb-10 md:px-10 md:pb-14">
-      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-400">Our story</p>
-      <h1 class="mt-3 max-w-2xl font-display text-4xl font-semibold text-cream-50 text-balance md:text-5xl">
-        Built from one doctor's frustration with rushed medicine
-      </h1>
-    </div>
+  <section class="mx-auto max-w-8xl px-6 pb-4 pt-14 md:px-10 md:pt-20" data-reveal>
+    <p class="font-mono-tag text-[11px] uppercase tracking-[0.1em] text-ink-2/60">
+      <span class="text-clay">[</span>Our story<span class="text-clay">]</span>
+    </p>
+    <h1 class="mt-4 max-w-2xl font-display text-5xl font-black leading-[0.95] text-balance text-ink md:text-6xl">
+      Built from one doctor's frustration with rushed medicine
+    </h1>
   </section>
 
-  <section class="mx-auto max-w-3xl px-6 py-20 md:py-28">
-    <p class="font-display text-2xl leading-relaxed text-ink-900 md:text-3xl">
+  <section class="mx-auto max-w-3xl px-6 py-16 md:py-20" data-reveal>
+    <p class="font-display text-2xl leading-relaxed text-ink md:text-3xl">
       Dr. Wanjiru Kamau spent ten years in Nairobi's public hospitals watching good doctors
       run through patients in under ten minutes, not because they didn't care, but because
       the system left them no choice.
     </p>
-    <p class="mt-6 text-base leading-relaxed text-ink-700">
+    <p class="mt-6 text-base leading-relaxed text-ink-2/80">
       In 2011 she opened Uzima's first branch in Kilimani with one rule that has never
       changed since: no consultation shorter than twenty minutes. It meant seeing fewer
       patients a day than a typical clinic. It also meant catching the things a rushed
       visit misses, a medication interaction, a growth pattern worth watching, a family
       history that changes the diagnosis entirely.
     </p>
-    <p class="mt-6 text-base leading-relaxed text-ink-700">
+    <p class="mt-6 text-base leading-relaxed text-ink-2/80">
       Thirteen years on, Uzima has grown to three branches spanning Nairobi, Mombasa and
       Kisumu, treating over 22,000 patients while keeping the founding promise intact.
       The clinic has changed size. The twenty minutes has not.
     </p>
   </section>
 
-  <section class="bg-forest-50 py-20 md:py-28">
+  <section class="relative aspect-[21/9] w-full overflow-hidden" data-reveal>
+    <img src={images.corridor} alt="A hallway at an Uzima Family Clinic branch" class="h-full w-full object-cover grayscale-[30%]" />
+    <div class="absolute inset-0 bg-ink/20"></div>
+    <div class="absolute bottom-6 left-6 font-mono-tag text-[11px] uppercase tracking-[0.08em] text-paper md:bottom-8 md:left-10">
+      <span class="text-clay">[</span>{branches.length} branches, one file<span class="text-clay">]</span>
+    </div>
+  </section>
+
+  <section class="bg-grain border-y border-line-dark bg-ink py-20 md:py-28">
     <div class="mx-auto max-w-8xl px-6 md:px-10">
-      <SectionHeading eyebrow="What we hold to" title="Four rules that don't bend with growth" />
-      <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <SectionHeading eyebrow="What we hold to" title="Four rules that don't bend with growth" light />
+      <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4" data-reveal-group>
         {
           values.map((v, i) => (
-            <div class="border-t-2 border-clay-400 pt-5">
-              <span class="font-display text-sm text-clay-600">0{i + 1}</span>
-              <h3 class="mt-2 font-display text-lg font-semibold text-ink-900">{v.title}</h3>
-              <p class="mt-3 text-sm leading-relaxed text-ink-500">{v.body}</p>
+            <div class="border-t border-line-dark pt-5">
+              <ChartTag label={`0${i + 1}`} light />
+              <h3 class="mt-3 font-display text-lg font-semibold text-paper">{v.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-bone/70">{v.body}</p>
             </div>
           ))
         }
@@ -105,14 +110,14 @@ const milestones = [
 
   <section class="mx-auto max-w-4xl px-6 py-20 md:py-28">
     <SectionHeading eyebrow="Thirteen years" title="How we grew from one room to three counties" align="center" />
-    <div class="mt-14 space-y-10">
+    <div class="mt-14 space-y-10" data-reveal-group>
       {
         milestones.map((m) => (
-          <div class="grid grid-cols-[auto_1fr] gap-6 border-b border-cream-300 pb-10 last:border-0">
-            <span class="font-display text-2xl font-semibold text-clay-500 md:text-3xl">{m.year}</span>
+          <div class="grid grid-cols-[auto_1fr] gap-6 border-b border-line pb-10 last:border-0">
+            <span class="font-mono-tag text-2xl font-semibold text-clay md:text-3xl">{m.year}</span>
             <div>
-              <h3 class="font-display text-lg font-semibold text-ink-900">{m.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-ink-500">{m.body}</p>
+              <h3 class="font-display text-lg font-semibold text-ink">{m.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-2/70">{m.body}</p>
             </div>
           </div>
         ))

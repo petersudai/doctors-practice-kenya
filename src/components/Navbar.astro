@@ -5,41 +5,41 @@ import MobileMenu from "./MobileMenu.tsx";
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-30 border-b border-cream-300/80 bg-cream-100/90 backdrop-blur">
-  <div class="mx-auto flex max-w-8xl items-center justify-between px-6 py-4 md:px-10">
-    <a href="/" class="flex items-baseline gap-2">
-      <span class="font-display text-2xl font-semibold text-ink-900">Uzima</span>
-      <span class="hidden font-display italic text-sm text-clay-600 sm:inline">Family Clinic</span>
+<header
+  data-nav
+  class="sticky top-0 z-30 border-b border-line-dark bg-ink transition-[padding] duration-300 [&.is-scrolled]:py-2.5 py-4"
+>
+  <div class="mx-auto flex max-w-8xl items-center justify-between px-6 md:px-10">
+    <a href="/" class="flex items-center gap-1 font-mono-tag text-base text-paper">
+      <span class="text-clay">uzima</span><span class="text-pulse">·</span>
     </a>
 
-    <nav class="hidden items-center gap-9 md:flex">
+    <nav class="hidden items-center gap-8 md:flex">
       {
         nav.map((item) => {
           const active = currentPath === item.href;
           return (
             <a
               href={item.href}
-              class={`relative py-1 text-sm font-medium tracking-wide transition-colors ${
-                active ? "text-clay-600" : "text-ink-700 hover:text-ink-900"
+              class={`font-mono-tag relative py-1 text-[12px] uppercase tracking-[0.08em] transition-colors ${
+                active ? "text-clay" : "text-bone hover:text-paper"
               }`}
             >
               {item.label}
-              {active && (
-                <span class="absolute -bottom-1 left-0 h-[2px] w-full bg-clay-500" />
-              )}
+              {active && <span class="absolute -bottom-1 left-0 h-px w-full bg-clay" />}
             </a>
           );
         })
       }
     </nav>
 
-    <div class="hidden items-center gap-4 md:flex">
-      <a href={brand.phoneHref} class="text-sm font-medium text-ink-700 hover:text-ink-900">
+    <div class="hidden items-center gap-5 md:flex">
+      <a href={brand.phoneHref} class="font-mono-tag text-[12px] text-bone hover:text-paper">
         {brand.phoneDisplay}
       </a>
       <a
         href="/contact"
-        class="inline-flex items-center rounded-full bg-clay-500 px-5 py-2.5 text-sm font-semibold text-cream-50 shadow-sm shadow-clay-900/10 transition-colors hover:bg-clay-600"
+        class="inline-flex items-center rounded-full bg-clay px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.06em] text-paper transition-colors hover:bg-pulse"
       >
         Book a Visit
       </a>

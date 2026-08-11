@@ -1,7 +1,9 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import VitalsMarquee from "../components/VitalsMarquee.astro";
 import WhatsAppButton from "../components/WhatsAppButton.tsx";
 
 interface Props {
@@ -13,7 +15,7 @@ interface Props {
 const {
   title,
   description,
-  image = "https://images.unsplash.com/photo-1536064479547-7ee40b74b807?auto=format&fit=crop&w=1200&q=80",
+  image = "https://images.unsplash.com/photo-1769072610024-5b8a50f05c73?auto=format&fit=crop&w=1200&q=80",
 } = Astro.props;
 
 const pageTitle = `${title} · Uzima Family Clinic`;
@@ -39,16 +41,56 @@ const pageTitle = `${title} · Uzima Family Clinic`;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <ClientRouter />
   </head>
   <body class="antialiased">
-    <Navbar />
+    <div transition:persist="chrome">
+      <VitalsMarquee />
+      <Navbar />
+    </div>
     <main>
       <slot />
     </main>
     <Footer />
     <WhatsAppButton client:load />
+
+    <script>
+      function initReveals() {
+        const els = document.querySelectorAll("[data-reveal], [data-reveal-group]");
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-revealed");
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+        );
+        els.forEach((el) => io.observe(el));
+      }
+
+      function initScrollNav() {
+        const nav = document.querySelector("[data-nav]");
+        if (!nav) return;
+        const onScroll = () => {
+          nav.classList.toggle("is-scrolled", window.scrollY > 24);
+        };
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+
+      initReveals();
+      initScrollNav();
+      document.addEventListener("astro:page-load", () => {
+        initReveals();
+        initScrollNav();
+      });
+    </script>
   </body>
 </html>

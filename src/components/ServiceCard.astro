@@ -4,22 +4,30 @@ import type { Service } from "../data/site";
 interface Props {
   service: Service;
   detailed?: boolean;
+  index?: number;
 }
-const { service, detailed = false } = Astro.props;
+const { service, detailed = false, index } = Astro.props;
 ---
 
-<article class="group flex flex-col overflow-hidden rounded-lg border border-cream-300 bg-cream-50 transition-shadow hover:shadow-xl hover:shadow-ink-900/5">
-  <div class="aspect-[16/10] overflow-hidden">
+<article class="group flex flex-col border border-line bg-paper transition-colors hover:border-clay" data-reveal>
+  <div class="relative aspect-[16/10] overflow-hidden">
     <img
       src={service.image}
       alt={service.name}
       loading="lazy"
-      class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+      class="h-full w-full object-cover grayscale-[10%] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
     />
+    {
+      typeof index === "number" && (
+        <span class="font-mono-tag absolute right-3 top-3 border border-paper/40 bg-ink/70 px-2 py-0.5 text-[11px] text-bone backdrop-blur">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      )
+    }
   </div>
   <div class="flex flex-1 flex-col p-6">
-    <h3 class="font-display text-lg font-semibold text-ink-900">{service.name}</h3>
-    <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-500">
+    <h3 class="font-display text-lg font-semibold text-ink">{service.name}</h3>
+    <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-2/70">
       {detailed ? service.detail : service.summary}
     </p>
   </div>

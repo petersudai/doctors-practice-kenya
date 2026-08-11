@@ -11,12 +11,14 @@ import { brand, branches, images } from "../data/site";
   description="Book an appointment at Uzima Family Clinic by WhatsApp, phone, or online form. Same-week slots available across Nairobi, Mombasa and Kisumu."
   image={images.heroContact}
 >
-  <section class="mx-auto max-w-8xl px-6 pb-4 pt-14 md:px-10 md:pt-20">
-    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-clay-600">Book a visit</p>
-    <h1 class="mt-3 max-w-xl font-display text-4xl font-semibold text-ink-900 text-balance md:text-5xl">
+  <section class="mx-auto max-w-8xl px-6 pb-4 pt-14 md:px-10 md:pt-20" data-reveal>
+    <p class="font-mono-tag text-[11px] uppercase tracking-[0.1em] text-ink-2/60">
+      <span class="text-clay">[</span>Book a visit<span class="text-clay">]</span>
+    </p>
+    <h1 class="mt-4 max-w-xl font-display text-5xl font-black leading-[0.95] text-balance text-ink md:text-6xl">
       Let's get you seen this week.
     </h1>
-    <p class="mt-5 max-w-lg text-base text-ink-700">
+    <p class="mt-5 max-w-lg text-base text-ink-2/80">
       Fill in the form below, message us on WhatsApp, or call your nearest branch directly.
       We confirm most requests within a few hours during business days.
     </p>
@@ -24,52 +26,54 @@ import { brand, branches, images } from "../data/site";
 
   <section class="mx-auto max-w-8xl px-6 py-14 md:px-10 md:py-20">
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_360px]">
-      <div class="rounded-2xl border border-cream-300 bg-cream-100 p-6 md:p-10">
+      <div class="border border-line bg-paper p-6 md:p-10" data-reveal>
         <BookingForm client:load />
       </div>
 
-      <div class="space-y-6">
-        <div class="rounded-2xl bg-forest-700 p-7 text-cream-50">
-          <h3 class="font-display text-lg font-semibold">Prefer to talk?</h3>
+      <div class="space-y-6" data-reveal>
+        <div class="border border-line-dark bg-ink p-7 text-paper">
+          <p class="font-mono-tag text-[11px] uppercase tracking-[0.1em] text-bone/60">
+            <span class="text-clay">[</span>Prefer to talk?<span class="text-clay">]</span>
+          </p>
           <a
             href={`https://wa.me/${brand.whatsappNumber}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-4 flex items-center justify-between rounded-lg bg-forest-600/60 px-4 py-3 text-sm font-medium hover:bg-forest-600"
+            class="mt-4 flex items-center justify-between border border-paper/15 px-4 py-3 text-sm font-medium hover:border-paper/40"
           >
             WhatsApp us
-            <span>{brand.whatsappDisplay}</span>
+            <span class="font-mono-tag text-xs text-bone">{brand.whatsappDisplay}</span>
           </a>
           <a
             href={brand.phoneHref}
-            class="mt-3 flex items-center justify-between rounded-lg bg-forest-600/60 px-4 py-3 text-sm font-medium hover:bg-forest-600"
+            class="mt-3 flex items-center justify-between border border-paper/15 px-4 py-3 text-sm font-medium hover:border-paper/40"
           >
             Call reception
-            <span>{brand.phoneDisplay}</span>
+            <span class="font-mono-tag text-xs text-bone">{brand.phoneDisplay}</span>
           </a>
           <a
             href={`mailto:${brand.email}`}
-            class="mt-3 flex items-center justify-between rounded-lg bg-forest-600/60 px-4 py-3 text-sm font-medium hover:bg-forest-600"
+            class="mt-3 flex items-center justify-between border border-paper/15 px-4 py-3 text-sm font-medium hover:border-paper/40"
           >
             Email us
-            <span class="truncate">{brand.email}</span>
+            <span class="truncate font-mono-tag text-xs text-bone">{brand.email}</span>
           </a>
         </div>
 
-        <div class="rounded-2xl border border-cream-300 p-7">
-          <h3 class="font-display text-lg font-semibold text-ink-900">Hours at a glance</h3>
-          <dl class="mt-4 space-y-2 text-sm text-ink-700">
-            <div class="flex justify-between">
-              <dt>Mon &ndash; Fri</dt>
-              <dd>7:00am &ndash; 8:00pm</dd>
+        <div class="border border-line p-7">
+          <h3 class="font-display text-lg font-semibold text-ink">Hours at a glance</h3>
+          <dl class="font-mono-tag mt-4 space-y-2 text-[12px] text-ink-2/80">
+            <div class="flex justify-between border-b border-line pb-2">
+              <dt>MON &ndash; FRI</dt>
+              <dd>7AM &ndash; 8PM</dd>
+            </div>
+            <div class="flex justify-between border-b border-line pb-2">
+              <dt>SATURDAY</dt>
+              <dd>8AM &ndash; 6PM</dd>
             </div>
             <div class="flex justify-between">
-              <dt>Saturday</dt>
-              <dd>8:00am &ndash; 6:00pm</dd>
-            </div>
-            <div class="flex justify-between">
-              <dt>Sunday</dt>
-              <dd>Kilimani only, 9am &ndash; 2pm</dd>
+              <dt>SUNDAY</dt>
+              <dd>Kilimani only, 9&ndash;2</dd>
             </div>
           </dl>
         </div>
@@ -77,7 +81,7 @@ import { brand, branches, images } from "../data/site";
     </div>
   </section>
 
-  <section class="bg-forest-50 py-20 md:py-28">
+  <section class="border-t border-line bg-paper-2 py-20 md:py-28">
     <div class="mx-auto max-w-8xl px-6 md:px-10">
       <SectionHeading eyebrow="Three locations" title="Find your nearest branch" />
       <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
