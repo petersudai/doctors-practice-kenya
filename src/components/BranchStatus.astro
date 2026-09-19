@@ -1,0 +1,134 @@
+---
+import { branches } from "../data/site";
+
+// Server-rendered fallback (no JS): the standard weekday window for each branch.
+const fmt = (h: number) => {
+  const hour = Math.floor(h);
+  const min = Math.round((h - hour) * 60);
+  const suffix = hour >= 12 ? "pm" : "am";
+  const twelve = hour % 12 === 0 ? 12 : hour % 12;
+  return `${twelve}:${String(min).padStart(2, "0")}${suffix}`;
+};
+const weekday = (b: (typeof branches)[number]) => {
+  const w = b.schedule[1];
+  return w ? `Mon–Sat ${fmt(w[0])} – ${fmt(w[1])}` : "See hours";
+};
+---
+
+<div class="mt-10" data-branch-status>
+  <p class="flex items-center justify-between font-mono-tag text-[11px] uppercase tracking-[0.1em] text-bone/60">
+    <span><span class="text-clay">[</span>Live branch status<span class="text-clay">]</span></span>
+    <span>EAT <span data-status-clock class="text-paper">--:--</span></span>
+  </p>
+
+  <ul class="mt-3 grid grid-cols-1 border border-line-dark sm:grid-cols-3">
+    {
+      branches.map((b) => (
+        <li
+          class="border-b border-line-dark last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0"
+          data-branch-row
+          data-state="unknown"
+          data-schedule={JSON.stringify(b.schedule)}
+        >
+          <a
+            href="/contact"
+            class="group flex h-full flex-col gap-1.5 p-4 transition-colors hover:bg-paper/5"
+          >
+            <span class="font-mono-tag text-[11px] uppercase tracking-[0.08em] text-bone/60">
+              {b.city}, {b.area}
+            </span>
+            <span class="flex items-center gap-2 font-display text-lg font-semibold leading-none text-paper">
+              <span class="status-dot inline-block h-2 w-2 shrink-0 rounded-full" aria-hidden="true" />
+              <span data-status-label>Opening hours</span>
+            </span>
+            <span data-status-detail class="font-mono-tag text-[11px] text-bone/70">
+              {weekday(b)}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const TZ = "Africa/Nairobi";
+  type Window = [number, number] | null;
+
+  const fmt = (h: number) => {
+    const hour = Math.floor(h);
+    const min = Math.round((h - hour) * 60);
+    const suffix = hour >= 12 ? "pm" : "am";
+    const twelve = hour % 12 === 0 ? 12 : hour % 12;
+    return `${twelve}:${String(min).padStart(2, "0")}${suffix}`;
+  };
+
+  function nairobiNow() {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: TZ,
+      weekday: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23",
+    }).formatToParts(new Date());
+    const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "0";
+    const hour = Number(get("hour"));
+    const minute = Number(get("minute"));
+    return {
+      day: DAYS.indexOf(get("weekday")),
+      minutes: hour * 60 + minute,
+      clock: `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`,
+    };
+  }
+
+  function status(schedule: Window[], day: number, minutes: number) {
+    const today = schedule[day];
+    if (today && minutes >= today[0] * 60 && minutes < today[1] * 60) {
+      const left = today[1] * 60 - minutes;
+      return left <= 60
+        ? { state: "closing", label: "Closing soon", detail: `Closes ${fmt(today[1])} · ${left} min left` }
+        : { state: "open", label: "Open now", detail: `Until ${fmt(today[1])}` };
+    }
+    if (today && minutes < today[0] * 60) {
+      return { state: "closed", label: "Closed", detail: `Opens today ${fmt(today[0])}` };
+    }
+    for (let i = 1; i <= 7; i++) {
+      const d = (day + i) % 7;
+      const next = schedule[d];
+      if (next) {
+        const when = i === 1 ? "tomorrow" : DAYS[d];
+        return { state: "closed", label: "Closed", detail: `Opens ${when} ${fmt(next[0])}` };
+      }
+    }
+    return { state: "closed", label: "Closed", detail: "See contact page" };
+  }
+
+  function update() {
+    const root = document.querySelector("[data-branch-status]");
+    if (!root) return;
+    const now = nairobiNow();
+    const clock = root.querySelector("[data-status-clock]");
+    if (clock) clock.textContent = now.clock;
+
+    root.querySelectorAll<HTMLElement>("[data-branch-row]").forEach((row) => {
+      const schedule = JSON.parse(row.dataset.schedule ?? "[]") as Window[];
+      const s = status(schedule, now.day, now.minutes);
+      row.dataset.state = s.state;
+      const label = row.querySelector("[data-status-label]");
+      const detail = row.querySelector("[data-status-detail]");
+      if (label) label.textContent = s.label;
+      if (detail) detail.textContent = s.detail;
+    });
+  }
+
+  let timer: number | undefined;
+  function start() {
+    update();
+    window.clearInterval(timer);
+    timer = window.setInterval(update, 30_000);
+  }
+
+  document.addEventListener("astro:page-load", start);
+  document.addEventListener("astro:before-swap", () => window.clearInterval(timer));
+</script>

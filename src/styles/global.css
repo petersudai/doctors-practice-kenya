@@ -161,4 +161,31 @@
       animation: none;
     }
   }
+
+  /* live branch status dot: hollow until we know, vermillion pulse when open */
+  .status-dot {
+    border: 1px solid var(--color-bone);
+    opacity: 0.5;
+    background: transparent;
+  }
+
+  [data-state="open"] .status-dot {
+    border-color: var(--color-pulse);
+    background: var(--color-pulse);
+    opacity: 1;
+    animation: pulse-blip 1.8s ease-in-out infinite;
+  }
+
+  [data-state="closing"] .status-dot {
+    border-color: var(--color-clay);
+    background: var(--color-clay);
+    opacity: 1;
+    animation: pulse-blip 0.9s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .status-dot {
+      animation: none !important;
+    }
+  }
 }

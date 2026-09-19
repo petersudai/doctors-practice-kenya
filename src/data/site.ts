@@ -177,6 +177,8 @@ export type Branch = {
   area: string;
   address: string;
   hours: string;
+  /** Opening window per weekday, Sunday = index 0, as [open, close] in 24h decimal hours (EAT). null = closed. */
+  schedule: (readonly [number, number] | null)[];
   phone: string;
   image: string;
   mapQuery: string;
@@ -189,6 +191,7 @@ export const branches: Branch[] = [
     area: "Kilimani",
     address: "Argwings Kodhek Road, Kilimani, Nairobi",
     hours: "Mon–Sat, 7:00am – 8:00pm · Sun, 9:00am – 2:00pm",
+    schedule: [[9, 14], [7, 20], [7, 20], [7, 20], [7, 20], [7, 20], [7, 20]],
     phone: "+254 722 123 456",
     image: images.nairobiSkyline,
     mapQuery: "Kilimani, Nairobi, Kenya",
@@ -199,6 +202,7 @@ export const branches: Branch[] = [
     area: "Nyali",
     address: "Links Road, Nyali, Mombasa",
     hours: "Mon–Sat, 8:00am – 7:00pm · Sun, closed",
+    schedule: [null, [8, 19], [8, 19], [8, 19], [8, 19], [8, 19], [8, 19]],
     phone: "+254 733 456 789",
     image: images.cityView,
     mapQuery: "Nyali, Mombasa, Kenya",
@@ -209,6 +213,7 @@ export const branches: Branch[] = [
     area: "Milimani",
     address: "Oginga Odinga Street, Milimani, Kisumu",
     hours: "Mon–Sat, 8:00am – 6:00pm · Sun, closed",
+    schedule: [null, [8, 18], [8, 18], [8, 18], [8, 18], [8, 18], [8, 18]],
     phone: "+254 711 987 654",
     image: images.cityView2,
     mapQuery: "Milimani, Kisumu, Kenya",
