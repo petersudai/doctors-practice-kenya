@@ -20,54 +20,59 @@ const featuredServices = services.slice(0, 4);
   title="Family Medicine Across Kenya"
   description="Uzima Family Clinic offers same-week family medicine, paediatric care, dental and diagnostics across Nairobi, Mombasa and Kisumu. SHA, NHIF and M-Pesa accepted."
 >
-  <section class="bg-grain relative overflow-hidden bg-ink text-paper">
-    <div class="mx-auto grid max-w-8xl grid-cols-1 gap-10 px-6 pb-0 pt-14 md:grid-cols-12 md:gap-4 md:px-10 md:pt-20">
-      <div class="md:col-span-7 md:pb-24">
-        <p class="font-mono-tag text-[11px] uppercase tracking-[0.1em] text-bone/70">
+  <section class="bg-grain relative flex flex-col overflow-hidden bg-ink text-paper lg:min-h-[calc(100svh-6.3rem)]">
+    <div class="mx-auto grid w-full max-w-8xl flex-1 grid-cols-1 gap-[clamp(1rem,3svh,2.5rem)] px-6 pt-[clamp(1.25rem,3.5svh,5rem)] md:grid-cols-12 md:gap-4 md:px-10">
+      <div class="flex flex-col justify-center md:col-span-7 md:pb-[clamp(1.25rem,3.5svh,4rem)]">
+        <p class="font-mono-tag text-[11px] uppercase tracking-[0.1em] text-bone/70 [@media(max-height:700px)]:hidden">
           <span class="text-clay">[</span>Karibu · Patient file since 2011<span class="text-clay">]</span>
         </p>
-        <h1 class="mt-6 font-display text-[13vw] font-black leading-[0.86] tracking-tight text-balance sm:text-[9vw] md:text-[6.4vw]">
+        <h1 class="mt-[clamp(0.75rem,2svh,1.5rem)] font-display text-[length:clamp(2.4rem,min(13vw,9svh),5rem)] font-black leading-[0.88] tracking-tight text-balance sm:text-[length:clamp(2.6rem,min(9vw,9svh),5.5rem)] md:text-[length:clamp(2.6rem,min(6.4vw,10.5svh),7rem)]">
           Healthcare
           <br />
           that knows
           <br />
           your <span class="font-display-italic text-clay">name.</span>
         </h1>
-        <p class="mt-8 max-w-md text-base leading-relaxed text-bone/80 md:text-lg">
-          Three clinics across Kenya where the same doctor sees you every visit, your
-          child's growth chart is never lost, and a same-week appointment is the default,
-          not the exception.
+        <p class="mt-[clamp(1rem,2.8svh,2rem)] max-w-lg text-base leading-relaxed text-bone/80 md:text-lg [@media(max-height:760px)]:md:text-base">
+          Three clinics across Kenya where the same doctor sees you every visit, and a
+          same-week appointment is the default, not the exception.
         </p>
-        <div class="mt-9 flex flex-wrap items-center gap-4">
+        <div class="mt-[clamp(1rem,3svh,2.25rem)] grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center sm:gap-4">
           <a
             href="/contact"
-            class="rounded-full bg-clay px-7 py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-pulse"
+            class="rounded-full bg-clay px-4 py-3.5 text-center text-sm font-semibold text-paper transition-colors hover:bg-pulse sm:px-7"
           >
-            Book an Appointment
+            <span class="sm:hidden">Book a visit</span>
+            <span class="hidden sm:inline">Book an Appointment</span>
           </a>
           <a
             href="/doctors"
-            class="rounded-full border border-paper/25 px-7 py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-paper/10"
+            class="rounded-full border border-paper/25 px-4 py-3.5 text-center text-sm font-semibold text-paper transition-colors hover:bg-paper/10 sm:px-7"
           >
-            Meet Our Doctors
+            <span class="sm:hidden">Our doctors</span>
+            <span class="hidden sm:inline">Meet Our Doctors</span>
           </a>
         </div>
         <BranchStatus />
-        <div class="mt-10 flex items-center gap-4">
-          <div class="flex -space-x-3">
-            {
-              testimonials.map((t) => (
-                <img
-                  src={t.photo}
-                  alt={t.name}
-                  class="h-9 w-9 rounded-full border-2 border-ink object-cover grayscale"
-                />
-              ))
-            }
+        <div class="hidden lg:block">
+          <div class="[@media(max-height:860px)]:hidden">
+            <div class="mt-8 flex items-center gap-4">
+              <div class="flex -space-x-3">
+                {
+                  testimonials.map((t) => (
+                    <img
+                      src={t.photo}
+                      alt={t.name}
+                      class="h-9 w-9 rounded-full border-2 border-ink object-cover grayscale"
+                    />
+                  ))
+                }
+              </div>
+              <p class="font-mono-tag text-[11px] uppercase tracking-[0.05em] text-bone/60">
+                4.9/5 — 800+ patient reviews
+              </p>
+            </div>
           </div>
-          <p class="font-mono-tag text-[11px] uppercase tracking-[0.05em] text-bone/60">
-            4.9/5 — 800+ patient reviews
-          </p>
         </div>
       </div>
 
@@ -80,8 +85,8 @@ const featuredServices = services.slice(0, 4);
           />
           <div class="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent"></div>
         </div>
-        <div class="absolute -bottom-px left-0 z-10 border border-line-dark bg-ink/90 p-5 backdrop-blur md:left-auto md:right-0">
-          <p class="font-display text-3xl font-semibold text-clay">22,000+</p>
+        <div class="absolute -bottom-px left-0 z-10 border border-line-dark bg-ink/90 p-4 backdrop-blur sm:p-5">
+          <p class="font-display text-2xl font-semibold text-clay sm:text-3xl">22,000+</p>
           <p class="font-mono-tag mt-1 text-[10px] uppercase tracking-[0.05em] text-bone/70">
             Patients treated across three counties
           </p>
@@ -89,10 +94,14 @@ const featuredServices = services.slice(0, 4);
       </div>
     </div>
 
-    <div class="mx-auto flex max-w-8xl items-center justify-between border-t border-line-dark px-6 py-4 md:px-10">
-      <span class="font-mono-tag text-[11px] uppercase tracking-[0.05em] text-bone/50">Scroll</span>
-      <span class="h-8 w-px animate-pulse bg-line-dark"></span>
-      <span class="font-mono-tag text-[11px] uppercase tracking-[0.05em] text-bone/50">01 / Home</span>
+    <div class="hidden lg:block">
+      <div class="[@media(max-height:820px)]:hidden">
+        <div class="mx-auto flex max-w-8xl items-center justify-between border-t border-line-dark px-6 py-3 md:px-10">
+          <span class="font-mono-tag text-[11px] uppercase tracking-[0.05em] text-bone/50">Scroll</span>
+          <span class="h-6 w-px animate-pulse bg-line-dark"></span>
+          <span class="font-mono-tag text-[11px] uppercase tracking-[0.05em] text-bone/50">01 / Home</span>
+        </div>
+      </div>
     </div>
   </section>
 

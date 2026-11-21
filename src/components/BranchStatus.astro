@@ -7,15 +7,15 @@ const fmt = (h: number) => {
   const min = Math.round((h - hour) * 60);
   const suffix = hour >= 12 ? "pm" : "am";
   const twelve = hour % 12 === 0 ? 12 : hour % 12;
-  return `${twelve}:${String(min).padStart(2, "0")}${suffix}`;
+  return min === 0 ? `${twelve}${suffix}` : `${twelve}:${String(min).padStart(2, "0")}${suffix}`;
 };
 const weekday = (b: (typeof branches)[number]) => {
   const w = b.schedule[1];
-  return w ? `Mon–Sat ${fmt(w[0])} – ${fmt(w[1])}` : "See hours";
+  return w ? `Mon–Sat ${fmt(w[0])}–${fmt(w[1])}` : "See hours";
 };
 ---
 
-<div class="mt-10" data-branch-status>
+<div class="mt-[clamp(1rem,3.2svh,2.5rem)]" data-branch-status>
   <p class="flex items-center justify-between font-mono-tag text-[11px] uppercase tracking-[0.1em] text-bone/60">
     <span><span class="text-clay">[</span>Live branch status<span class="text-clay">]</span></span>
     <span>EAT <span data-status-clock class="text-paper">--:--</span></span>
@@ -32,17 +32,19 @@ const weekday = (b: (typeof branches)[number]) => {
         >
           <a
             href="/contact"
-            class="group flex h-full flex-col gap-1.5 p-4 transition-colors hover:bg-paper/5"
+            class="group flex h-full items-center justify-between gap-3 px-3 py-2.5 transition-colors hover:bg-paper/5 sm:flex-col sm:items-start sm:justify-start sm:gap-1.5 sm:px-4 sm:py-[clamp(0.6rem,1.8svh,1rem)]"
           >
             <span class="font-mono-tag text-[11px] uppercase tracking-[0.08em] text-bone/60">
-              {b.city}, {b.area}
+              {b.city}<span class="hidden sm:inline">, {b.area}</span>
             </span>
-            <span class="flex items-center gap-2 font-display text-lg font-semibold leading-none text-paper">
-              <span class="status-dot inline-block h-2 w-2 shrink-0 rounded-full" aria-hidden="true" />
-              <span data-status-label>Opening hours</span>
-            </span>
-            <span data-status-detail class="font-mono-tag text-[11px] text-bone/70">
-              {weekday(b)}
+            <span class="flex min-w-0 items-center gap-2.5 sm:flex-col sm:items-start sm:gap-1.5">
+              <span class="flex items-center gap-2 font-display text-base font-semibold leading-none text-paper sm:text-lg">
+                <span class="status-dot inline-block h-2 w-2 shrink-0 rounded-full" aria-hidden="true" />
+                <span data-status-label>Opening hours</span>
+              </span>
+              <span data-status-detail class="font-mono-tag text-[10px] text-bone/70 sm:text-[11px]">
+                {weekday(b)}
+              </span>
             </span>
           </a>
         </li>
@@ -61,7 +63,7 @@ const weekday = (b: (typeof branches)[number]) => {
     const min = Math.round((h - hour) * 60);
     const suffix = hour >= 12 ? "pm" : "am";
     const twelve = hour % 12 === 0 ? 12 : hour % 12;
-    return `${twelve}:${String(min).padStart(2, "0")}${suffix}`;
+    return min === 0 ? `${twelve}${suffix}` : `${twelve}:${String(min).padStart(2, "0")}${suffix}`;
   };
 
   function nairobiNow() {
@@ -87,7 +89,7 @@ const weekday = (b: (typeof branches)[number]) => {
     if (today && minutes >= today[0] * 60 && minutes < today[1] * 60) {
       const left = today[1] * 60 - minutes;
       return left <= 60
-        ? { state: "closing", label: "Closing soon", detail: `Closes ${fmt(today[1])} · ${left} min left` }
+        ? { state: "closing", label: "Closing soon", detail: `${left} min left` }
         : { state: "open", label: "Open now", detail: `Until ${fmt(today[1])}` };
     }
     if (today && minutes < today[0] * 60) {
